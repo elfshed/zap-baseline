@@ -129,7 +129,7 @@ class ZapWebdriver:
 
         if self.auth_username:
             # find username field
-            userField = self.driver.find_element_by_xpath("(//input[(@type='text' and contains(@name,'ser')) or @type='text'])[1]")
+            userField = self.driver.find_element_by_xpath("(//input[((@type='text' or @type='email') and contains(@name,'ser')) or @type='text'])[1]")
             userField.clear()
             userField.send_keys(self.auth_username)
 
@@ -140,18 +140,18 @@ class ZapWebdriver:
                 passField.clear()
                 passField.send_keys(self.auth_password)
 
-            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @type='submit' or @type='button']")
+            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @id='login' or @type='submit' or @type='button']")
             sumbitField.click()
         except:
             logging.info('Did not find password field - auth in 2 steps')
             # login in two steps
-            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @type='submit' or @type='button']")
+            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @id='login' or @type='submit' or @type='button']")
             sumbitField.click()
             if self.auth_password:
                 passField = self.driver.find_element_by_xpath("//input[@type='password' or contains(@name,'ass')]")
                 passField.clear()
                 passField.send_keys(self.auth_password)
-            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @type='submit' or @type='button']")
+            sumbitField = self.driver.find_element_by_xpath("//*[(translate(@name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')='login' and (@type='submit' or @type='button')) or @id='login' or @type='submit' or @type='button']")
             sumbitField.click()
 
     def normal_login(self, zap, target):
